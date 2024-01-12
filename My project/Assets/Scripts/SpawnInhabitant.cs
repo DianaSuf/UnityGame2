@@ -17,7 +17,9 @@ public class SpawnInhabitant : MonoBehaviour
     private Dictionary<string, bool> spawnLight = new Dictionary<string, bool>()
     {
         {"Light", true},
-        {"Light1", true}
+        {"Light1", true},
+        {"Light2", true},
+        {"Light3", true}
     };
 
     void Update()
