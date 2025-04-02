@@ -39,11 +39,13 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        speed = 6f;
+
         if (Input.GetKey(KeyCode.LeftShift))
             speed = 3f;
-        else if (trigIce)
+
+        if (trigIce)
             speed = 2f;
-        else speed = 6f;
 
         moveVector.x = Input.GetAxisRaw("Horizontal");
         anim.SetFloat("Horizontal", moveVector.x);
