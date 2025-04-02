@@ -42,5 +42,8 @@ Thumbs.db
 
 .vs
 .vscode
+*.vsidx
+
+Logs
 *.log
 *.dwlt
