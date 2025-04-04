@@ -1,15 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    public static bool isDead;
-    float speed = 1f;
-    Transform target;
+    public static float totalAlive = 0;
+    public static UnityEvent<Enemy> OnSpawn = new();
+    public static UnityEvent<Enemy> OnDeath = new();
+    
+    private float speed = 1f;
+    private Transform target;
+
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        totalAlive += 1;
+        OnSpawn.Invoke(this);
+    }
+
+    private void OnDestroy()
+    {
+        totalAlive -= 1;
+        OnDeath.Invoke(this);
     }
 
     void Update()
@@ -31,10 +44,6 @@ public class Enemy : MonoBehaviour
         {
             speed = 2f;
         }
-        //if (Bullet.isDead)
-        //{
-        //    Destroy(gameObject);
-        //}
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,7 +51,6 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("its enemy!");
             Destroy(gameObject);
-            isDead = true;
         }
     }
 }

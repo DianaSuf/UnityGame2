@@ -1,9 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Experimental.GlobalIllumination;
 
 public class Movement : MonoBehaviour
 {
+    public static UnityEvent OnEnterLight = new();
+
     public float speed = 6f;
     private Rigidbody2D rb;
     private Vector2 moveVector;
@@ -14,16 +17,20 @@ public class Movement : MonoBehaviour
     public static int MaxCount;
     public int Count;
     public static bool trigIce = false;
-    public static bool isLight = false;
     public static bool isFinish = false;
     public static bool isEnemy = false;
-    public static string lightPrefab;
     public Animator anim;
     AudioManager audioManager;
+
+    public static Movement Instance { get; private set; }
 
     public void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
+        if (Instance == null)
+            Instance = this;
+        else Destroy(gameObject);
     }
 
     void Start()
@@ -84,20 +91,17 @@ public class Movement : MonoBehaviour
                 }
             }
         }
+
         if (collision.gameObject.tag == "Light")
         {
-            isLight = true;
-            lightPrefab = collision.name;
-            Debug.Log("в света");
+            OnEnterLight.Invoke();
         }
-        //else
-        //{
-        //    isLight = false;    
-        //}
+
         if (collision.gameObject.tag == "Finish")
         {
             isFinish = true;
         }
+
         if (collision.gameObject.tag == "Enemy")
         {
             isEnemy = true;
@@ -117,11 +121,6 @@ public class Movement : MonoBehaviour
         if (collision.gameObject.tag == "Ice")
         {
             trigIce = false;
-        }
-        if (collision.gameObject.tag == "Light")
-        {
-            isLight = false;
-            Debug.Log("вышел из света");
         }
     }
 }

@@ -1,58 +1,64 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Noise : MonoBehaviour
 {
-    public Image NoiseScale;
-    public static bool MaxScaleNoise;
+    public static UnityEvent OnNoise = new();
 
-    void Start()
+    public Image noiseImage;
+    public float noiseCapacity = 3;
+    private float _noiseAmount = 0;
+    public float noiseAmount
+    {
+        get
+        {
+            return _noiseAmount;
+        }
+        set
+        {
+            _noiseAmount = Mathf.Max(value, 0);
+        }
+    }
+
+    [Header("Noise Modifiers")]
+    public float defaultModifier = 1f;
+    public float iceModifier = 0.5f;
+    public float standModifier = -1.5f;
+
+    private void Start()
     {
 
     }
 
-    void Update()
+    private void Update()
     {
-        if (TimeCounter.TimeRemaining > 0 && Progress.MaxCount != Progress.RealCount)
-        {
-            if (!Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.W) 
-                || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-                && !Movement.trigIce)
-                GetNoise();
-            else if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.W)
-                || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) ||
-                Movement.trigIce)
-                GetSilenceWithCondition();
-            else GetSilence();
+        UpdateNoise();
 
-            if (NoiseScale.fillAmount == 1f)
-            {
-                MaxScaleNoise = true;
-                NoiseScale.fillAmount = 0f;
-            }
-            else
-            {
-                MaxScaleNoise = false;
-            }
+        if (noiseAmount >= noiseCapacity)
+        {
+            noiseAmount -= noiseCapacity;
+            OnNoise.Invoke();
         }
 
+        noiseImage.fillAmount = noiseAmount / noiseCapacity;
     }
 
-    private void GetNoise()
+    private void UpdateNoise()
     {
-        NoiseScale.fillAmount = Mathf.Lerp(NoiseScale.fillAmount, 0.2f + NoiseScale.fillAmount, Time.deltaTime);
-    }
+        float axisX = Input.GetAxisRaw("Horizontal");
+        float axisY = Input.GetAxisRaw("Vertical");
+        bool isMoving = Mathf.Abs(axisX) + Mathf.Abs(axisY) > 0;
 
-    private void GetSilenceWithCondition()
-    {
-        NoiseScale.fillAmount = Mathf.Lerp(NoiseScale.fillAmount, NoiseScale.fillAmount - 0.05f, Time.deltaTime);
-    }
-
-    private void GetSilence()
-    {
-        NoiseScale.fillAmount = Mathf.Lerp(NoiseScale.fillAmount, NoiseScale.fillAmount - 0.1f, Time.deltaTime);
+        if (isMoving)
+        {
+            noiseAmount += (Movement.trigIce ? iceModifier : defaultModifier) * Time.deltaTime;
+        }
+        else
+        {
+            noiseAmount += standModifier * Time.deltaTime;
+        }
     }
 }
