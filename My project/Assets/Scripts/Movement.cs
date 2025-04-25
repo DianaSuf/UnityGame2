@@ -1,24 +1,17 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public class Movement : MonoBehaviour
 {
     public static UnityEvent OnEnterLight = new();
+    public static UnityEvent<Enemy> OnEnterEnemy = new();
+    public static UnityEvent OnFinish = new();
 
     public float speed = 6f;
     private Rigidbody2D rb;
     private Vector2 moveVector;
-    private bool faceRight = true;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI scoreAll;
-    public static int score;
-    public static int MaxCount;
-    public int Count;
     public static bool trigIce = false;
-    public static bool isFinish = false;
-    public static bool isEnemy = false;
     public Animator anim;
     AudioManager audioManager;
 
@@ -37,11 +30,6 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        MaxCount = Count;
-        scoreText.text = string.Format("{0} / {1}", 0, MaxCount);
-        isFinish = false;
-        isEnemy = false;
-        
     }
 
     void Update()
@@ -59,7 +47,6 @@ public class Movement : MonoBehaviour
         moveVector.y = Input.GetAxisRaw("Vertical");
         anim.SetFloat("Vertical", moveVector.y);
         anim.SetFloat("Speed", moveVector.sqrMagnitude);
-
     }
 
     private void FixedUpdate()
@@ -67,29 +54,13 @@ public class Movement : MonoBehaviour
         rb.MovePosition(rb.position + moveVector * speed * Time.fixedDeltaTime);
     }
 
-    private void Flip()
-    {
-        faceRight = !faceRight;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "CollectiveSquare")
         {
+            Destroy(collision.gameObject);
+            ScoreManager.Instance.Score += 1;
             audioManager.PlaySFX(audioManager.presents);
-            if (TimeCounter.TimeRemaining > 0)
-            {
-                score++;
-                scoreAll.text = string.Format("{0} / {1}", score, MaxCount);
-                Destroy(collision.gameObject);
-                if (score != MaxCount + 1)
-                {
-                    scoreText.text = string.Format("{0} / {1}", score, MaxCount);
-                }
-            }
         }
 
         if (collision.gameObject.tag == "Light")
@@ -99,12 +70,14 @@ public class Movement : MonoBehaviour
 
         if (collision.gameObject.tag == "Finish")
         {
-            isFinish = true;
+            OnFinish.Invoke();
         }
 
         if (collision.gameObject.tag == "Enemy")
         {
-            isEnemy = true;
+            collision.gameObject.TryGetComponent<Enemy>(out var enemy);
+            if (enemy != null)
+                OnEnterEnemy.Invoke(enemy);
         }
     }
 

@@ -482,6 +482,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &464824355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 464824357}
+  - component: {fileID: 464824356}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &464824356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464824355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406ba4c4aa58b9145b06a86c089dac62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &464824357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464824355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.47914833, y: 1.703604, z: -0.05901161}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527723042
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,7 +745,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406ba4c4aa58b9145b06a86c089dac62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneNumber: 0
 --- !u!114 &711889602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,7 +1019,6 @@ GameObject:
   - component: {fileID: 788348491}
   - component: {fileID: 788348490}
   - component: {fileID: 788348489}
-  - component: {fileID: 788348488}
   - component: {fileID: 788348492}
   - component: {fileID: 788348493}
   m_Layer: 5
@@ -1010,19 +1052,6 @@ RectTransform:
   m_AnchoredPosition: {x: 432.01, y: -49}
   m_SizeDelta: {x: 215.33, y: 212.18}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &788348488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788348486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 406ba4c4aa58b9145b06a86c089dac62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneNumber: 6
 --- !u!114 &788348489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,14 +1096,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 788348488}
+      - m_Target: {fileID: 464824356}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: Transition
-        m_Mode: 1
+        m_MethodName: GotoScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1129,12 +1158,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d66807841f35b84fb4e64c1e1adb213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  nameLevel: level3
-  stars0: {fileID: 867779054}
-  stars1: {fileID: 644425878}
-  stars2: {fileID: 527723042}
-  stars3: {fileID: 46770574}
+  levelId: 3
+  starsPanels:
+  - {fileID: 867779054}
+  - {fileID: 644425878}
+  - {fileID: 527723042}
+  - {fileID: 46770574}
 --- !u!114 &788348493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1582,7 +1611,6 @@ GameObject:
   - component: {fileID: 1431867881}
   - component: {fileID: 1431867880}
   - component: {fileID: 1431867879}
-  - component: {fileID: 1431867878}
   - component: {fileID: 1431867882}
   m_Layer: 5
   m_Name: Button
@@ -1614,19 +1642,6 @@ RectTransform:
   m_AnchoredPosition: {x: -430, y: -49}
   m_SizeDelta: {x: 213.35, y: 212.18}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1431867878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431867876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 406ba4c4aa58b9145b06a86c089dac62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneNumber: 4
 --- !u!114 &1431867879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1671,14 +1686,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1431867878}
+      - m_Target: {fileID: 464824356}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: Transition
-        m_Mode: 1
+        m_MethodName: GotoScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1733,12 +1748,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d66807841f35b84fb4e64c1e1adb213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  nameLevel: level1
-  stars0: {fileID: 2035377730}
-  stars1: {fileID: 715386579}
-  stars2: {fileID: 2014544713}
-  stars3: {fileID: 926756173}
+  levelId: 1
+  starsPanels:
+  - {fileID: 2035377730}
+  - {fileID: 715386579}
+  - {fileID: 2014544713}
+  - {fileID: 926756173}
 --- !u!1 &1484751692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,7 +1850,6 @@ GameObject:
   - component: {fileID: 1517019208}
   - component: {fileID: 1517019207}
   - component: {fileID: 1517019206}
-  - component: {fileID: 1517019205}
   - component: {fileID: 1517019209}
   - component: {fileID: 1517019210}
   m_Layer: 5
@@ -1869,19 +1883,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -49}
   m_SizeDelta: {x: 215.51, y: 212.18}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1517019205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1517019203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 406ba4c4aa58b9145b06a86c089dac62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneNumber: 5
 --- !u!114 &1517019206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1926,14 +1927,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1517019205}
+      - m_Target: {fileID: 464824356}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: Transition
-        m_Mode: 1
+        m_MethodName: GotoScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1988,12 +1989,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d66807841f35b84fb4e64c1e1adb213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  nameLevel: level2
-  stars0: {fileID: 173324369}
-  stars1: {fileID: 1484751692}
-  stars2: {fileID: 1684455576}
-  stars3: {fileID: 732727738}
+  levelId: 2
+  starsPanels:
+  - {fileID: 173324369}
+  - {fileID: 1484751692}
+  - {fileID: 1684455576}
+  - {fileID: 732727738}
 --- !u!114 &1517019210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2631,4 +2632,5 @@ SceneRoots:
   - {fileID: 1917413279}
   - {fileID: 148643838}
   - {fileID: 1692742694}
+  - {fileID: 464824357}
   - {fileID: 217004824}

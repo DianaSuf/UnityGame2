@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    public int sceneNumber;
-
-    public void Transition()
+    public void RestartScene()
     {
-        SceneManager.LoadScene(sceneNumber);
-        Movement.score = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+    }
+
+    public void GotoScene(int index)
+    {
+        SceneManager.LoadScene(index);
         Time.timeScale = 1f;
     }
 }

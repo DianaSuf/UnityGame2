@@ -11,7 +11,7 @@ public class Noise : MonoBehaviour
     public Image noiseImage;
     public float noiseCapacity = 3;
     private float _noiseAmount = 0;
-    public float noiseAmount
+    public float NoiseAmount
     {
         get
         {
@@ -37,13 +37,13 @@ public class Noise : MonoBehaviour
     {
         UpdateNoise();
 
-        if (noiseAmount >= noiseCapacity)
+        if (NoiseAmount >= noiseCapacity)
         {
-            noiseAmount -= noiseCapacity;
+            NoiseAmount -= noiseCapacity;
             OnNoise.Invoke();
         }
 
-        noiseImage.fillAmount = noiseAmount / noiseCapacity;
+        noiseImage.fillAmount = NoiseAmount / noiseCapacity;
     }
 
     private void UpdateNoise()
@@ -54,11 +54,11 @@ public class Noise : MonoBehaviour
 
         if (isMoving)
         {
-            noiseAmount += (Movement.trigIce ? iceModifier : defaultModifier) * Time.deltaTime;
+            NoiseAmount += (Movement.trigIce ? iceModifier : defaultModifier) * Time.deltaTime;
         }
         else
         {
-            noiseAmount += standModifier * Time.deltaTime;
+            NoiseAmount += standModifier * Time.deltaTime;
         }
     }
 }

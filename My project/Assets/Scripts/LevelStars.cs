@@ -6,43 +6,14 @@ using UnityEngine.UI;
 
 public class LevelStars : MonoBehaviour
 {
-    public int level;
-    public string nameLevel;
-    public GameObject stars0;
-    public GameObject stars1;
-    public GameObject stars2;
-    public GameObject stars3;
+    public LevelIdentifier levelId;
+    public List<GameObject> starsPanels = new();
 
-    public void Update()
+    public void Start()
     {
-        level = PlayerPrefs.GetInt(nameLevel);
-        if (level == 0)
-        {
-            stars0.gameObject.SetActive(true);
-            stars1.gameObject.SetActive(false);
-            stars2.gameObject.SetActive(false);
-            stars3.gameObject.SetActive(false);
-        }
-        else if (level == 1)
-        {
-            stars1.gameObject.SetActive(true);
-            stars0.gameObject.SetActive(false);
-            stars2.gameObject.SetActive(false);
-            stars3.gameObject.SetActive(false);
-        }
-        else if (level == 2)
-        {
-            stars2.gameObject.SetActive(true);
-            stars1.gameObject.SetActive(false);
-            stars0.gameObject.SetActive(false);
-            stars3.gameObject.SetActive(false);
-        }
-        else if (level == 3)
-        {
-            stars3.gameObject.SetActive(true);
-            stars1.gameObject.SetActive(false);
-            stars2.gameObject.SetActive(false);
-            stars0.gameObject.SetActive(false);
-        }
+        var stars = LevelManager.getLevelStars(levelId);
+        starsPanels[stars].SetActive(true);
+
+        Debug.Log(LevelManager.getLevelStars(levelId));
     }
 }

@@ -8,7 +8,7 @@ public class Restart : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
-        Movement.score = 0;
+        ScoreManager.Instance.Score = 0;
         Time.timeScale = 1f;
     }
 }

@@ -23,13 +23,13 @@ public class SpawnInhabitant : MonoBehaviour
 
         Noise.OnNoise.AddListener(() =>
         {
-            if (TimeCounter.TimeRemaining <= 0 || Movement.isFinish || Movement.isEnemy) return;
+            if (Time.timeScale == 0) return;
             SpawnNearestEnemy();
         });
 
         Movement.OnEnterLight.AddListener(() =>
         {
-            if (TimeCounter.TimeRemaining <= 0 || Movement.isFinish || Movement.isEnemy) return;
+            if (Time.timeScale == 0) return;
             SpawnNearestEnemy();
         });
     }

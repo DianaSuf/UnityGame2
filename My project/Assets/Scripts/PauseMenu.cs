@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Movement.score = 0;
+        ScoreManager.Instance.Score = 0;
         Time.timeScale = 1f;
         GameIsPause = false;
     }
@@ -38,7 +38,7 @@ public class PauseMenu : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
         Time.timeScale = 1f;
-        Movement.score = 0;
+        ScoreManager.Instance.Score = 0;
         Time.timeScale = 1f;
         GameIsPause = false;
     }
