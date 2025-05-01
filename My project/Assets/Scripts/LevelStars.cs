@@ -13,7 +13,5 @@ public class LevelStars : MonoBehaviour
     {
         var stars = LevelManager.getLevelStars(levelId);
         starsPanels[stars].SetActive(true);
-
-        Debug.Log(LevelManager.getLevelStars(levelId));
     }
 }

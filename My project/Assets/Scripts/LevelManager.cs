@@ -33,7 +33,10 @@ public class LevelManager : MonoBehaviour
 
     public void saveStars(int stars)
     {
-        PlayerPrefs.SetInt(levelName, stars);
+        if (stars > getStars())
+        {
+            PlayerPrefs.SetInt(levelName, stars);
+        }
     }
 
     public void addSnow(int amount)

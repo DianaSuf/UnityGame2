@@ -45,12 +45,4 @@ public class Enemy : MonoBehaviour
             speed = 2f;
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            Debug.Log("its enemy!");
-            Destroy(gameObject);
-        }
-    }
 }
