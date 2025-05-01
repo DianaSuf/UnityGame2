@@ -12,6 +12,7 @@ public class VolumeInit : MonoBehaviour
     {
         var volumeValue = PlayerPrefs.GetFloat(volumeParameter, 0.0f);
         mixer.SetFloat(volumeParameter, volumeValue);
+        Debug.Log($"{volumeParameter}: {volumeValue}");
     }
 
     // Update is called once per frame

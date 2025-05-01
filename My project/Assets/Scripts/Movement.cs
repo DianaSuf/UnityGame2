@@ -11,16 +11,13 @@ public class Movement : MonoBehaviour
     public float speed = 6f;
     private Rigidbody2D rb;
     private Vector2 moveVector;
-    public static bool trigIce = false;
+    public static bool isOnIce = false;
     public Animator anim;
-    AudioManager audioManager;
 
     public static Movement Instance { get; private set; }
 
     public void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-
         if (Instance == null)
             Instance = this;
         else Destroy(gameObject);
@@ -34,19 +31,34 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        speed = 6f;
-
-        if (Input.GetKey(KeyCode.LeftShift))
-            speed = 3f;
-
-        if (trigIce)
-            speed = 2f;
-
         moveVector.x = Input.GetAxisRaw("Horizontal");
         anim.SetFloat("Horizontal", moveVector.x);
         moveVector.y = Input.GetAxisRaw("Vertical");
         anim.SetFloat("Vertical", moveVector.y);
         anim.SetFloat("Speed", moveVector.sqrMagnitude);
+
+        speed = 6f;
+
+        if (moveVector.sqrMagnitude > 0)
+        {
+            AudioManager.Footsteps = true;
+        }
+        else
+        {
+            AudioManager.Footsteps = false;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {   
+            speed = 3f;
+            AudioManager.Footsteps = false;
+        }
+
+        if (isOnIce)
+        {
+            speed = 2f;
+            AudioManager.Footsteps = false;
+        }
     }
 
     private void FixedUpdate()
@@ -60,7 +72,7 @@ public class Movement : MonoBehaviour
         {
             Destroy(collision.gameObject);
             ScoreManager.Instance.Score += 1;
-            audioManager.PlaySFX(audioManager.presents);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.presentPickUpClip);
         }
 
         if (collision.gameObject.tag == "Light")
@@ -85,7 +97,7 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ice")
         {
-            trigIce = true;
+            isOnIce = true;
         }
     }
 
@@ -93,7 +105,7 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ice")
         {
-            trigIce = false;
+            isOnIce = false;
         }
     }
 }

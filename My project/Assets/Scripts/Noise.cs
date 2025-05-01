@@ -54,7 +54,7 @@ public class Noise : MonoBehaviour
 
         if (isMoving)
         {
-            NoiseAmount += (Movement.trigIce ? iceModifier : defaultModifier) * Time.deltaTime;
+            NoiseAmount += (Movement.isOnIce ? iceModifier : defaultModifier) * Time.deltaTime;
         }
         else
         {
