@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 {
     private float speed = 10f;
     public float distance;
-    public LayerMask whatIsSolid;
+    public AudioClip hitSoundClip;
 
     private Vector2 target;
 
@@ -30,6 +30,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            var hitGO = new GameObject("Snowball hit sound");
+            var audioSource = hitGO.AddComponent<AudioSource>();
+            audioSource.clip = hitSoundClip;
+            audioSource.Play();
+            Destroy(hitGO, hitSoundClip.length);
+
             Destroy(collision.gameObject);
         }
     }

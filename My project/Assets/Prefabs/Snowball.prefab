@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5453934572468064651}
   - component: {fileID: 6011947065509665786}
   m_Layer: 0
-  m_Name: "\u0421\u043D\u0435\u0436\u043E\u043A"
+  m_Name: Snowball
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,9 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0.5
-  whatIsSolid:
-    serializedVersion: 2
-    m_Bits: 64
+  hitSoundClip: {fileID: 8300000, guid: 97305e7294111de4c9283dbad78ea8bc, type: 3}
 --- !u!58 &6011947065509665786
 CircleCollider2D:
   m_ObjectHideFlags: 0
