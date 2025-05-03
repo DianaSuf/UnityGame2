@@ -2614,6 +2614,7 @@ MonoBehaviour:
   noiseCapacity: 3
   defaultModifier: 1
   iceModifier: 0.5
+  crouchingModifier: -1
   standModifier: -1
 --- !u!1 &458935536
 GameObject:
@@ -5878,6 +5879,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  isOnIce: 0
+  isCrouching: 0
   anim: {fileID: 0}
 --- !u!50 &902285983
 Rigidbody2D:
@@ -7556,6 +7559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  isOnIce: 0
+  isCrouching: 0
   anim: {fileID: 0}
 --- !u!50 &1062767311
 Rigidbody2D:
@@ -8123,6 +8128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  isOnIce: 0
+  isCrouching: 0
   anim: {fileID: 0}
 --- !u!50 &1110742561
 Rigidbody2D:
@@ -15203,6 +15210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  isOnIce: 0
+  isCrouching: 0
   anim: {fileID: 0}
 --- !u!50 &2056154344
 Rigidbody2D:

@@ -7,22 +7,19 @@ public class NoActiv : MonoBehaviour
 {
     public GameObject block;
     public Button button;
-    public string nameLevel;
-    private int level;
+    public LevelIdentifier levelId;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        level = PlayerPrefs.GetInt(nameLevel);
-        if (level == 0)
-        {
-            block.SetActive(true);
-            button.interactable = false;
-        }
-        else
+        if (LevelManager.getLevelStars(levelId) > 0)
         {
             block.SetActive(false);
             button.interactable = true;
+        }
+        else
+        {
+            block.SetActive(true);
+            button.interactable = false;
         }
     }
 }
