@@ -24,14 +24,10 @@ public class Noise : MonoBehaviour
     }
 
     [Header("Noise Modifiers")]
-    public float defaultModifier = 1f;
-    public float iceModifier = 0.5f;
-    public float standModifier = -1.5f;
-
-    private void Start()
-    {
-
-    }
+    [Range(-4, 4)] public float defaultModifier = 1f;
+    [Range(-4, 4)] public float iceModifier = 0.5f;
+    [Range(-4, 4)] public float crouchingModifier = -1f;
+    [Range(-4, 4)] public float standModifier = -1.5f;
 
     private void Update()
     {
@@ -54,7 +50,11 @@ public class Noise : MonoBehaviour
 
         if (isMoving)
         {
-            NoiseAmount += (Movement.isOnIce ? iceModifier : defaultModifier) * Time.deltaTime;
+            var modifier = defaultModifier;
+            if (Movement.Instance.isOnIce) modifier = iceModifier;
+            if (Movement.Instance.isCrouching) modifier = crouchingModifier;
+
+            NoiseAmount += modifier * Time.deltaTime;
         }
         else
         {

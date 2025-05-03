@@ -11,7 +11,8 @@ public class Movement : MonoBehaviour
     public float speed = 6f;
     private Rigidbody2D rb;
     private Vector2 moveVector;
-    public static bool isOnIce = false;
+    public bool isOnIce = false;
+    public bool isCrouching = false;
     public Animator anim;
 
     public static Movement Instance { get; private set; }
@@ -51,7 +52,11 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {   
             speed = 3f;
+            isCrouching = true;
             AudioManager.Footsteps = false;
+        } else
+        {
+            isCrouching = false;
         }
 
         if (isOnIce)
