@@ -31,9 +31,6 @@ public class Enemy : MonoBehaviour
         OnSpawn.Invoke(this);
 
         var data = speeds.FirstOrDefault((item) => item.levelId == LevelManager.Instance.levelId);
-        Debug.Log(data);
-
-        Debug.Log(data.value);
         speed = data.value;
     }
 
