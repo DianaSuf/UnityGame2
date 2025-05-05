@@ -36,6 +36,11 @@ public class UIManager : MonoBehaviour
         {
             ShowGameover();
         });
+
+        TimeCounter.OnTimeUp.AddListener(() =>
+        {
+            ShowGameover();
+        });
     }
 
     private void Update()
