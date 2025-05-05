@@ -34,12 +34,12 @@ public class UIManager : MonoBehaviour
 
         Movement.OnEnterEnemy.AddListener((enemy) =>
         {
-            ShowGameover();
+            ShowGameover(true);
         });
 
         TimeCounter.OnTimeUp.AddListener(() =>
         {
-            ShowGameover();
+            ShowGameover(true);
         });
     }
 
@@ -63,9 +63,17 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void ShowGameover()
+    public void ShowGameover(bool defeat = false)
     {
         if (gameOverPanels.Count != 4) throw new System.Exception("There should be a four gameover panels");
+
+        if (defeat)
+        {
+            gameOverPanels[0].SetActive(true);
+            Time.timeScale = 0f;
+            return;
+        }
+
         int stars = ScoreManager.Instance.GetStars();
         gameOverPanels[stars].SetActive(true);
         Time.timeScale = 0f;

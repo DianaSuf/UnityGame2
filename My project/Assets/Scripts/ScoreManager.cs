@@ -46,11 +46,11 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        TimeCounter.OnTimeUp.AddListener(ProccessStarsAndSnow);
+        // TimeCounter.OnTimeUp.AddListener(ProccessStarsAndSnow);
 
         Movement.OnFinish.AddListener(ProccessStarsAndSnow);
 
-        Movement.OnEnterEnemy.AddListener((enemy) => ProccessStarsAndSnow());
+        // Movement.OnEnterEnemy.AddListener((enemy) => ProccessStarsAndSnow());
     }
 
     public int GetStars()
@@ -58,7 +58,7 @@ public class ScoreManager : MonoBehaviour
         int stars = 0;
         starsThreshold.ForEach((threshold) =>
         {
-            if (Score > threshold) stars += 1;
+            if (Score >= threshold) stars += 1;
         });
         if (stars > 3) throw new System.Exception("There should be exactly 3 star thresholds");
         return stars;
